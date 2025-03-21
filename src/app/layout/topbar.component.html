@@ -1,0 +1,25 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="">
+        <span>Cloud fade</span>
+    </a>
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <div class="layout-topbar-menu">
+        @if (this.userService.userSignal()) {
+            <button class="p-link layout-topbar-button" (click)="createMenu.toggle($event)">
+                <i class="pi pi-pen-to-square"></i>
+            </button>
+        }
+    
+        <button class="p-link layout-topbar-button" (click)="userMenu.toggle($event);">
+            <i class="pi pi-user"></i>
+        </button>
+    </div>
+    
+    <p-menu #createMenu [model]="this.createMenuItems()" [popup]="true" />
+    <p-menu #userMenu [model]="this.userMenuItems()" [popup]="true" />
+
+</div>

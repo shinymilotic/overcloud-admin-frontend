@@ -1,0 +1,25 @@
+
+
+.btn-favorite {
+  padding: 3px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn-favorite:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.pi-heart-fill {
+  background-color: transparent;
+}
+
+.pi-heart {
+  color: gray;
+}
+
+.pi-heart:hover {
+  color: black;
+}

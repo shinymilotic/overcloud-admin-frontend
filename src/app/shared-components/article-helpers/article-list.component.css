@@ -1,0 +1,12 @@
+.page-link {
+  cursor: pointer;
+}
+.btn-moreArticle {
+  text-align: center;
+  padding-bottom: 20px;
+  cursor: pointer;
+}
+
+.btn-moreArticle:hover {
+  color: #0084ff;
+}

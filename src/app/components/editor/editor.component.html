@@ -1,0 +1,76 @@
+<div class="editor-page">
+
+  <div class="p-4">
+    <app-list-errors [errors]="errors"></app-list-errors>
+
+    <form [formGroup]="articleForm">
+      <fieldset [disabled]="isSubmitting">
+        <fieldset class="form-group bg-white">
+            <label for="title">Title: </label>
+            <input pInputText id="title" class="form-control form-control-lg w-full outline-none"
+              formControlName="title"
+              placeholder=". . ."
+              type="text"/>
+        </fieldset>
+  
+        <fieldset class="form-group bg-white">
+            <label for="description">Description: </label>
+            <input pInputText id="description" class="form-control form-control-lg w-full outline-none"
+              class="form-control w-full outline-none"
+              formControlName="description"
+              placeholder=". . ." type="text"/>
+        </fieldset>
+  
+        <fieldset class="form-group bg-white">
+          <label for="tags">Tags: </label><br>
+          <p-dropdown #tagInputTextElement
+            [options]="filteredTags" 
+            placeholder="Select a Tag. . ." 
+            optionLabel="name"
+            [filter]="true"
+            [showClear]="true" 
+            (onChange)="clickTag($event)">
+  
+            </p-dropdown>
+        </fieldset>
+        <div class="inTag">
+          @for (tag of inTags; track $index) {
+          <div class="cursor-pointer relative tag"
+            id="{{ tag.name }}">{{ tag.name }}
+            <span
+              class="material-symbols-outlined cancel-tag"
+              (click)="deleteTag(tag)"
+            >
+              cancel
+            </span>
+          </div>
+        }
+        </div>
+
+        <fieldset class="form-group bg-white">
+          <div class="editor-header">
+            @for (item of items; track $index) {
+              <button class="menu-item" [class]="item.isActive && item.isActive()? 'is-active' : ''" (click)="item.action()">
+              <span class="material-symbols-outlined">
+                {{item.icon}}
+              </span>
+              </button>
+            }
+          </div>
+          <div class="tiptap-editor">
+            
+          </div>
+        </fieldset>
+        <button
+          id="submitBtn"
+          class="post-btn overcloud-btn"
+          type="button"
+          (click)="submitForm()"
+        >
+          Post
+        </button>
+      </fieldset>
+    </form>
+  </div>
+  
+</div>

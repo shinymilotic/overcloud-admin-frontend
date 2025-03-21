@@ -1,0 +1,14 @@
+<button
+  class="btn-favorite"
+  [class]="{
+    disabled: isSubmitting,
+  }"
+  (click)="toggleFavoriteBtn($event)"
+>
+  @if (article.favorited) {
+    <i class="pi pi-heart-fill" style="color:rgba(254, 44, 85, 1)" ></i>
+  } @else {
+    <i class="pi pi-heart" ></i>
+  }
+  <span><ng-content></ng-content></span>
+</button>

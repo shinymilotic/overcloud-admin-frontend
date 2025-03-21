@@ -1,0 +1,68 @@
+#submitBtn {
+  display: block;
+  float: right;
+}
+
+.inTag div {
+  background-color: #f2f2f2;
+  padding: 8px 16px;
+  width: fit-content;
+  flex-direction: row;
+  margin-right: 8px;
+  border-radius: 100px;
+}
+
+.inTag {
+  display: flex;
+  margin: 20px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.selectedTag {
+  background-color: #def1ff !important;
+}
+
+.cancel-tag {
+  position: absolute;
+  font-size: 18px;
+  top: 0;
+  right: -10px;
+}
+
+.editor-page {
+  background-color: white!important;
+  min-height: 80vh;
+}
+
+.menu-item {
+  background-color: transparent;
+  border: none;
+  border-radius: 0.4rem;
+  color: #303030;
+  cursor: pointer;
+  height: 2.5rem;
+  margin-right: 0.25rem;
+  padding: 0.25rem;
+  width: 3rem;
+
+  span {
+    fill: currentColor;
+    height: 100%;
+    width: 100%;
+  }
+
+  &:hover,
+  &.is-active {
+    background-color: gray ;
+  }
+}
+
+.post-btn {
+  padding: .2em 1.5em;
+  border-radius: 8px;
+}
+
+.tiptap-editor {
+  min-height: 30vh;
+}

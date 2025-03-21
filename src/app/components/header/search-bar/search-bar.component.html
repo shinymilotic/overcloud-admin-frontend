@@ -1,0 +1,14 @@
+<form (ngSubmit)="this.onSearch()" [formGroup]="this.searchForm" >
+  <div class="flex search-bar">
+    <input
+      matInput
+      type="text"
+      placeholder="  Search..."
+      name="q"
+      formControlName="searchInput"
+      class="outline-none pl-6 w-full text-black"
+    />
+    <button type="submit" class="w-12 h-8">
+    </button>
+  </div>
+</form>

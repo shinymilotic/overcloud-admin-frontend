@@ -1,0 +1,10 @@
+<button
+  class="follow-btn overcloud-btn"
+  [ngClass]="{
+    disabled: isSubmitting,
+  }"
+  (click)="toggleFollowing()"
+>
+  <i class="ion-plus-round"></i>
+  {{ this.following ? "Unfollow" : "Follow" }}
+</button>

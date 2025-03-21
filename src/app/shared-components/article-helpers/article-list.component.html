@@ -1,0 +1,23 @@
+<app-article-preview *ngFor="let article of results" [article]="article">
+</app-article-preview>
+
+@if (this.isNoMore) {
+  <div class="btn-moreArticle" (click)="this.moreArticle()">
+    See more
+  </div>
+}
+
+
+@if (loading === LoadingState.LOADING) {
+  <div class="article-preview">
+    Loading...
+  </div>
+}
+
+
+@if (loading === LoadingState.LOADED && !results.length) {
+  <div class="article-preview">
+    No posts.
+  </div>
+}
+

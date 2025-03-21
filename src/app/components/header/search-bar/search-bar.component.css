@@ -1,0 +1,23 @@
+
+
+input {
+  /* background: var(--yt-spec-base-background, #282828); */
+}
+
+.search-bar{
+  border-radius: 28px;
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  gap: 4px;
+  flex: 1 0 0;
+  align-self: stretch;
+  border: solid 1px;
+}
+
+.search-bar, .search-bar input {
+  background-color: white;
+}
+fa-icon {
+  color: black;
+}
