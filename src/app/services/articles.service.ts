@@ -11,47 +11,19 @@ export class ArticlesService {
 
   constructor(private readonly http: HttpClient) {}
 
-  query(
-    config: ArticleListConfig
-  ): Observable<ArticleList> {
+  getArticles(pageNumber?: number, itemsPerPage?: number): Observable<ArticleList> {
     let params = new HttpParams();
-
-    Object.keys(config.filters).forEach((key) => {
-      // @ts-ignore
-      params = params.set(key, config.filters[key]);
-    });
-
-    return this.http.get<ArticleList>(
-      "/articles",
-      { params }
-    );
-  }
-
-  get(id: string): Observable<Article> {
+    
+    if (pageNumber != null && itemsPerPage != null) {
+      params = params.set('pageNumber', pageNumber);
+      params = params.set('itemsPerPage', itemsPerPage);  
+    }
+    
     return this.http
-      .get<Article>(`/articles/${id}`);
+      .get<ArticleList>(`/articles`, { params });
   }
 
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`/articles/${id}`);
-  }
-
-  create(article: Partial<SubmitArticle>): Observable<string> {
-    return this.http
-      .post<string>("/articles", article);
-  }
-
-  update(article: Partial<SubmitArticle>, id: string): Observable<string> {
-    return this.http
-      .put<string>(`/articles/${id}`, article);
-  }
-
-  favorite(id: string): Observable<void> {
-    return this.http
-      .post<void>(`/articles/${id}/favorite`, {});
-  }
-
-  unfavorite(id: string): Observable<void> {
-    return this.http.delete<void>(`/articles/${id}/unfavorite`);
+  deleteArticle(articleId: string): Observable<void> {
+    return this.http.delete<void>(`/admin/articles/${articleId}`);
   }
 }

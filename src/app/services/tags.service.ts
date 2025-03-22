@@ -1,31 +1,36 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Tag } from "../models/blog/tag.model";
-import { TagList } from "../components/management/tag/tag-list.model";
+import { TagList } from "../components/tag/tag-list.model";
 
 @Injectable({ providedIn: "root" })
 export class TagService {
   
   constructor(private readonly http: HttpClient) {}
 
-  getAll(following: boolean): Observable<Tag[]> {
-    return this.http
-      .get<Tag[]>("/tags", { params: { following } });
-  }
+  public getTags(pageNumber?: number, itemsPerPage?: number) : Observable<TagList> {
+    let params = new HttpParams();
 
-  getFollowingTags() : Observable<Tag[]> {
+    if (pageNumber != null && itemsPerPage != null) {
+    params = params.set('pageNumber', pageNumber);
+    params = params.set('itemsPerPage', itemsPerPage);  
+    }
+    
     return this.http
-      .get<Tag[]>("/followingTags");
-  }
+    .get<TagList>(`/admin/tags`, { params });
+}
 
-  followTag(tagId: string): Observable<void> {
-    return this.http
-      .post<void>(`/tags/${tagId}/follow`, {});
-  }
+public deleteTag(tagId: string) : Observable<void> {
+    let params = new HttpParams();
 
-  unfollowTag(tagId: string) : Observable<void> {
-    return this.http
-      .post<void>(`/tags/${tagId}/unfollow`, {});
-  }
+    if (tagId != null) {
+    params = params.set('tagId', tagId);
+    }
+
+    return this.http.delete<void>(`/admin/tags`, { params });
+}
+
+public createTag(tag: any) : Observable<void> {
+    return this.http.post<void>(`/admin/tags`, tag);
+}
 }

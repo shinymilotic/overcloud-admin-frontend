@@ -5,7 +5,8 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { User } from "../models/auth/user.model";
 import { AuthCookieUtils } from "../utils/authCookie.utils";
 import { ApiError } from "../models/apierrors.model";
-import { CreateUserRequest } from "../components/management/user/create-user/create-user-request.model";
+import { CreateUserRequest } from "../components/user/create-user/create-user-request.model";
+import { UserList } from "../components/user/user-list.model";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -42,14 +43,6 @@ export class UserService {
     return this.http.get<User>("/users/current");
   }
 
-  update(user: Partial<User>): Observable<User> {
-    return this.http.put<User>("/users", user).pipe(
-      tap((user) => {
-        this.userSignal.set(user);
-      })
-    );
-  }
-
   auth(): Observable<User> {
     return this.http.get<User>("/users/current").pipe(
       tap({
@@ -79,8 +72,24 @@ export class UserService {
     ;
   }
 
-  getFollowers(userId: string) : Observable<User[]> {
+  getUsers(pageNumber?: number, itemsPerPage?: number) : Observable<UserList> {
+    let params = new HttpParams();
+
+    if (pageNumber != null && itemsPerPage != null) {
+      params = params.set('pageNumber', pageNumber);
+      params = params.set('itemsPerPage', itemsPerPage);  
+    }
+    
     return this.http
-      .get<User[]>(`/followers/${userId}`, {});
+      .get<UserList>(`/users`, { params });
+  }
+
+  deleteUser(userId: string) : Observable<void> {
+    return this.http
+      .delete<void>(`/users/${userId}`);
+  }
+
+  createUser(user: CreateUserRequest): Observable<void>  {
+    return this.http.post<void>(`/users`, user);
   }
 }
