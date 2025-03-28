@@ -10,8 +10,8 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
 import { ApiError } from 'src/app/models/apierrors.model';
 import { ListErrorsComponent } from 'src/app/shared-components/list-errors/list-errors.component';
-import { AdminTestService } from 'src/app/services/admin-tests.service';
 import { TestList } from './test-list.model';
+import { TestService } from 'src/app/services/test.service';
 
 @Component({
   selector: 'app-test',
@@ -30,7 +30,7 @@ export class TestComponent {
   error!: ApiError;
 
   constructor(
-    private readonly testService: AdminTestService,
+    private readonly testService: TestService,
     private readonly router: Router
   ) {}
 

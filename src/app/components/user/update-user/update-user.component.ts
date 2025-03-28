@@ -13,7 +13,6 @@ import { CreateUserRequest } from '../create-user/create-user-request.model';
 import { CreateUserForm } from '../create-user/create-user.component';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { AdminUserService } from 'src/app/services/admin-users.service';
 import { UserLogic } from '../user-logic';
 
 @Component({
@@ -45,7 +44,7 @@ isDisable: boolean = true;
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly userService: AdminUserService,
+    private readonly userService: UserService,
     private readonly router: Router,
     private readonly userLogic: UserLogic
   ) { }

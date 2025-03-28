@@ -11,7 +11,7 @@ import { TableModule } from 'primeng/table';
 import { ApiError } from 'src/app/models/apierrors.model';
 import { ListErrorsComponent } from 'src/app/shared-components/list-errors/list-errors.component';
 import { ArticleList } from './article-list.model';
-import { AdminArticleService } from 'src/app/services/admin-articles.service';
+import { ArticleService } from 'src/app/services/articles.service';
 
 @Component({
   selector: 'app-article',
@@ -30,7 +30,7 @@ export class ArticleComponent {
   error!: ApiError;
 
   constructor(
-    private readonly articleService: AdminArticleService,
+    private readonly articleService: ArticleService,
     private readonly router: Router
   ) {}
 

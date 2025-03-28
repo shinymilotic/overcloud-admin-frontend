@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
-import { ArticlesService } from "../../services/articles.service";
+import { ArticleService } from "../../services/articles.service";
 import { UserService } from "../../services/user.service";
 import { Article } from "../../models/blog/article.model";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -28,7 +28,7 @@ export class FavoriteButtonComponent {
   @Output() toggle = new EventEmitter<boolean>();
 
   constructor(
-    private readonly articleService: ArticlesService,
+    private readonly articleService: ArticleService,
     private readonly router: Router,
     private readonly userService: UserService) {
       

@@ -63,7 +63,6 @@ export class UserService {
   refreshToken(): Observable<string> {
     return this.http
       .post<string>("/users/refresh-token", {});
-      ;
   }
 
   confirmEmail(token: string) : Observable<void> {

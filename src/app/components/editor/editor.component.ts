@@ -14,7 +14,7 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ListErrorsComponent } from "../../shared-components/list-errors/list-errors.component";
-import { ArticlesService } from "../../services/articles.service";
+import { ArticleService } from "../../services/articles.service";
 import { Subject, throwError } from "rxjs";
 import { catchError, take } from "rxjs/operators";
 import { UserService } from "../../services/user.service";
@@ -58,7 +58,7 @@ export class EditorComponent implements OnInit {
   destroyRef: DestroyRef = inject(DestroyRef);
 
   constructor(
-    private readonly articleService: ArticlesService,
+    private readonly articleService: ArticleService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly userService: UserService,
@@ -73,54 +73,54 @@ export class EditorComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params["id"];
-    if (id != undefined) {
-      this.articleService.get(id)
-        .pipe(
-          catchError((err) => {
-            void this.router.navigate(["/editor"]);
-            return throwError(() => err);
-          }),
-          takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: (data) => {
-            if (this.userService.userSignal()?.username === data.author.username) {
-              this.inTags = data.tagList;
-              this.articleForm.patchValue(data);
-              this.editor = new Editor({
-                element: this.elementRef.nativeElement.querySelector('.tiptap-editor') as HTMLElement,
-                extensions: [
-                  StarterKit,
-                ],
-                content: data.body,
+    // if (id != undefined) {
+    //   this.articleService.get(id)
+    //     .pipe(
+    //       catchError((err) => {
+    //         void this.router.navigate(["/editor"]);
+    //         return throwError(() => err);
+    //       }),
+    //       takeUntilDestroyed(this.destroyRef))
+    //     .subscribe({
+    //       next: (data) => {
+    //         if (this.userService.userSignal()?.username === data.author.username) {
+    //           this.inTags = data.tagList;
+    //           this.articleForm.patchValue(data);
+    //           this.editor = new Editor({
+    //             element: this.elementRef.nativeElement.querySelector('.tiptap-editor') as HTMLElement,
+    //             extensions: [
+    //               StarterKit,
+    //             ],
+    //             content: data.body,
           
-              });
-              this.isUpdate = true;
-            } else {
-              void this.router.navigate(["/"]);
-            }
-            this.initEditorMenu();
-          },
-          error: (errors: ApiError) => {
-            this.isSubmitting = false;
-            this.errors = errors;
-          },
-        });
-    } else {
-      this.editor = new Editor({
-        element: this.elementRef.nativeElement.querySelector('.tiptap-editor') as HTMLElement,
-        extensions: [
-          StarterKit,
-        ],
-        content: '<div class="editor-content"></div>',
-      });
-      this.initEditorMenu();
-    }
+    //           });
+    //           this.isUpdate = true;
+    //         } else {
+    //           void this.router.navigate(["/"]);
+    //         }
+    //         this.initEditorMenu();
+    //       },
+    //       error: (errors: ApiError) => {
+    //         this.isSubmitting = false;
+    //         this.errors = errors;
+    //       },
+    //     });
+    // } else {
+    //   this.editor = new Editor({
+    //     element: this.elementRef.nativeElement.querySelector('.tiptap-editor') as HTMLElement,
+    //     extensions: [
+    //       StarterKit,
+    //     ],
+    //     content: '<div class="editor-content"></div>',
+    //   });
+    //   this.initEditorMenu();
+    // }
 
-    this.tagService.getAll(false)
-      .pipe(takeUntilDestroyed(this.destroyRef))      
-      .subscribe((data) => {
-        this.filteredTags = data;
-      });
+    // this.tagService.getAll(false)
+    //   .pipe(takeUntilDestroyed(this.destroyRef))      
+    //   .subscribe((data) => {
+    //     this.filteredTags = data;
+    //   });
   }
 
   initEditorMenu() {
@@ -223,34 +223,34 @@ export class EditorComponent implements OnInit {
 
   updateArticle() : void {
     const article : Partial<SubmitArticle> = this.articleForSubmit();
-    this.articleService
-      .update(article, this.route.snapshot.params["id"])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: () => {
-          this.router.navigate(["/articles/", this.route.snapshot.params["id"]]);
-        },
-        error: (err) => {
-          this.errors = err;
-          this.isSubmitting = false;
-        },
-      });
+    // this.articleService
+    //   .update(article, this.route.snapshot.params["id"])
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe({
+    //     next: () => {
+    //       this.router.navigate(["/articles/", this.route.snapshot.params["id"]]);
+    //     },
+    //     error: (err) => {
+    //       this.errors = err;
+    //       this.isSubmitting = false;
+    //     },
+    //   });
   }
 
   createArticle() {
     const article : Partial<SubmitArticle> = this.articleForSubmit();
-    this.articleService
-      .create(article)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: (data) => {
-          this.router.navigate(["/articles/", data]);
-        },
-        error: (errors: ApiError) => {
-          this.errors = errors;
-          this.isSubmitting = false;
-        },
-      });
+    // this.articleService
+    //   .create(article)
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe({
+    //     next: (data) => {
+    //       this.router.navigate(["/articles/", data]);
+    //     },
+    //     error: (errors: ApiError) => {
+    //       this.errors = errors;
+    //       this.isSubmitting = false;
+    //     },
+    //   });
   }
 
   clickTag($event: any) {

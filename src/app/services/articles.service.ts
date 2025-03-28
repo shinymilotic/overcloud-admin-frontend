@@ -1,13 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ArticleListConfig } from "../models/blog/article-list-config.model";
-import { Article } from "../models/blog/article.model";
-import { SubmitArticle } from "../components/editor/submit-article.model";
-import { ArticleList } from "../models/blog/article-list.model";
+import { ArticleList } from "../components/article/article-list.model";
 
 @Injectable({ providedIn: "root" })
-export class ArticlesService {
+export class ArticleService {
 
   constructor(private readonly http: HttpClient) {}
 
@@ -24,6 +21,6 @@ export class ArticlesService {
   }
 
   deleteArticle(articleId: string): Observable<void> {
-    return this.http.delete<void>(`/admin/articles/${articleId}`);
+    return this.http.delete<void>(`/articles/${articleId}`);
   }
 }

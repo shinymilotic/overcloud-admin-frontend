@@ -5,7 +5,7 @@ import {
   inject,
   Input,
 } from "@angular/core";
-import { ArticlesService } from "../../services/articles.service";
+import { ArticleService } from "../../services/articles.service";
 import { ArticleListConfig } from "../../models/blog/article-list-config.model";
 import { Article } from "../../models/blog/article.model";
 import { ArticlePreviewComponent } from "./article-preview.component";
@@ -40,7 +40,7 @@ export class ArticleListComponent {
   }
 
   constructor(
-    private articlesService: ArticlesService,
+    private articlesService: ArticleService,
   ) {}
 
   runQuery() {

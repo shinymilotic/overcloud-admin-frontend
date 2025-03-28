@@ -10,7 +10,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
-import { AdminTagService } from 'src/app/services/admin-tags.service';
 import { ListErrorsComponent } from 'src/app/shared-components/list-errors/list-errors.component';
 
 @Component({
@@ -29,7 +28,7 @@ export class TagComponent implements OnInit {
   destroyRef: DestroyRef = inject(DestroyRef);
 
   constructor(
-    private readonly tagService: AdminTagService,
+    private readonly tagService: TagService,
     private readonly router: Router
   ) {}
 

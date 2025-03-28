@@ -9,9 +9,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ApiError } from 'src/app/models/apierrors.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AdminUserService } from 'src/app/services/admin-users.service';
 import { UserList } from './user-list.model';
 import { ListErrorsComponent } from 'src/app/shared-components/list-errors/list-errors.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -30,7 +30,7 @@ export class UserComponent implements OnInit {
   error!: ApiError;
 
   constructor(
-    private readonly userSerivce: AdminUserService,
+    private readonly userSerivce: UserService,
     private readonly router: Router
   ) {}
 
@@ -38,7 +38,7 @@ export class UserComponent implements OnInit {
     this.userSerivce.getUsers(this.pageNumber, this.itemsPerPage)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (users) => {
+        next: (users: UserList) => {
           this.users = users;
         },
         error: (error: ApiError) => {
