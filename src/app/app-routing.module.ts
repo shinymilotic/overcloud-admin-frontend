@@ -11,11 +11,29 @@ import { AuthGuard } from "./auth-guard";
 
 export const routes: Routes = [
   {
+    path: "login",
+    loadComponent: () =>
+      import("./components/login/login.component").then(
+        (m) => m.LoginComponent
+      ),
+    canActivate: [
+      () => !inject(UserService).userSignal(),
+    ],
+  },
+  {
     path: "",
     component: LayoutComponent,
     children: [
       {
-        path: "admin/user",
+        path: "",
+        loadComponent: () =>
+          import("./components/home/home.component").then((m) => m.HomeComponent),
+        canActivate: [
+          () => inject(AuthGuard).canActivate(),
+        ],
+      },
+      {
+        path: "users",
         loadComponent: () =>
           import("./components/user/user.component").then((m) => m.UserComponent),
         canActivate: [
@@ -23,7 +41,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: "admin/user/create",
+        path: "users/create",
         loadComponent: () =>
           import("./components/user/create-user/create-user.component").then((m) => m.CreateUserComponent),
         canActivate: [
@@ -31,7 +49,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: "admin/user/:username/update",
+        path: "users/:username/update",
         loadComponent: () =>
           import("./components/user/update-user/update-user.component").then((m) => m.UpdateUserComponent),
         canActivate: [
@@ -39,7 +57,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: "admin/tag",
+        path: "tags",
         loadComponent: () =>
           import("./components/tag/tag.component").then((m) => m.TagComponent),
         canActivate: [
@@ -47,7 +65,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: "admin/tag/create",
+        path: "tags/create",
         loadComponent: () =>
           import("./components/tag/create-tag/create-tag.component").then((m) => m.CreateTagComponent),
         canActivate: [
@@ -55,7 +73,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: "admin/tag/:id/update",
+        path: "tags/:id/update",
         loadComponent: () =>
           import("./components/tag/update-tag/update-tag.component").then((m) => m.UpdateTagComponent),
         canActivate: [
@@ -63,7 +81,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: "admin/article",
+        path: "articles",
         loadComponent: () =>
           import("./components/article/article.component").then((m) => m.ArticleComponent),
         canActivate: [
@@ -71,32 +89,11 @@ export const routes: Routes = [
         ],
       },
       {
-        path: "admin/test",
+        path: "tests",
         loadComponent: () =>
           import("./components/test/test.component").then((m) => m.TestComponent),
         canActivate: [
           () => inject(AuthGuard).canActivate(),
-        ],
-      },
-      {
-        path: "editor",
-        children: [
-          {
-            path: "",
-            loadComponent: () =>
-              import("./components/editor/editor.component").then(
-                (m) => m.EditorComponent
-              ),
-            canActivate: [() => inject(UserService).userSignal()],
-          },
-          {
-            path: ":id",
-            loadComponent: () =>
-              import("./components/editor/editor.component").then(
-                (m) => m.EditorComponent
-              ),
-            canActivate: [() => inject(UserService).userSignal()],
-          },
         ],
       },
     ]
