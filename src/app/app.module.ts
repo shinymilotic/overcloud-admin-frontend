@@ -4,7 +4,7 @@ import { BrowserModule, provideClientHydration, withHttpTransferCacheOptions } f
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { UserService } from "./services/user.service";
-import { EMPTY, Observable } from "rxjs";
+import { EMPTY } from "rxjs";
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { TokenInterceptor } from "./interceptors/token.interceptor";
 import { ApiInterceptor } from "./interceptors/api.interceptor";
@@ -29,8 +29,6 @@ export function initAuth(authCookieUtils: AuthCookieUtils, userService: UserServ
         AppRoutingModule,
         ServiceWorkerModule.register("ngsw-worker.js", {
             enabled: !isDevMode(),
-            // Register the ServiceWorker as soon as the application is stable
-            // or after 30 seconds (whichever comes first).
             registrationStrategy: "registerWhenStable:30000",
         }),
         BrowserAnimationsModule], providers: [
