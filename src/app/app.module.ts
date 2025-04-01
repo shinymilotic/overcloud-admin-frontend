@@ -1,6 +1,5 @@
 import { APP_INITIALIZER, NgModule, isDevMode } from "@angular/core";
 import { BrowserModule, provideClientHydration, withHttpTransferCacheOptions } from "@angular/platform-browser";
-
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { UserService } from "./services/user.service";
